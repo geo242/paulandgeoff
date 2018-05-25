@@ -28,7 +28,7 @@ expressConfig(app);
 routes(app);
 
 // Start server 
-server.listen(config.port, config.host, function paulandgeoffServer() {
+server.listen(config.port, function paulandgeoffServer() {
     console.log('\n' + colors
         .green('---------------------------------------------------------------------------'));
 
