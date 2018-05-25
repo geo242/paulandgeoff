@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "main": "paulandgeoff.js",
   "scripts": {
-    "prestart": "npm test",
     "start": "node paulandgeoff.js",
     "dev": "supervisor paulandgeoff.js",
     "lint": "jshint ./ --reporter node_modules/jshint-stylish-ex/stylish.js --config .jshintrc",
