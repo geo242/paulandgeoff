@@ -5,5 +5,5 @@
 module.exports = {
     env: process.env.NODE_ENV,
     host: 'localhost',
-    port: 9001,
+    port: process.env.PORT || 9001,
 };
