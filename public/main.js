@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".main {\n    margin: 0 auto;\n    padding-bottom: 50%;\n    text-align: center;\n    position: relative;\n}\n\n.main__logo {\n    top: 25%;\n    left: 25%;\n    width: 50%;\n    -webkit-animation: float 6s ease-in-out infinite;\n            animation: float 6s ease-in-out infinite;\n    position: absolute;\n}\n\n@-webkit-keyframes float {\n\t0% {\n\t\t-webkit-transform: translatey(0px);\n\t\t        transform: translatey(0px);\n\t}\n\t50% {\n\t\t-webkit-transform: translatey(-15px);\n\t\t        transform: translatey(-15px);\n\t}\n\t100% {\n\t\t-webkit-transform: translatey(0px);\n\t\t        transform: translatey(0px);\n\t}\n}\n\n@keyframes float {\n\t0% {\n\t\t-webkit-transform: translatey(0px);\n\t\t        transform: translatey(0px);\n\t}\n\t50% {\n\t\t-webkit-transform: translatey(-15px);\n\t\t        transform: translatey(-15px);\n\t}\n\t100% {\n\t\t-webkit-transform: translatey(0px);\n\t\t        transform: translatey(0px);\n\t}\n}"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n  <img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n</div>\n<h2>Here are some links to help you start: </h2>\n<ul>\n  <li>\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://angular.io/tutorial\">Tour of Heroes</a></h2>\n  </li>\n  <li>\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://github.com/angular/angular-cli/wiki\">CLI Documentation</a></h2>\n  </li>\n  <li>\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://blog.angular.io/\">Angular blog</a></h2>\n  </li>\n</ul>\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div class=\"main\">\n  <a\n    title=\"Paul &amp; Geoff on Soundcloud\" href=\"https://soundcloud.com/paul-and-geoff-say-words\"\n    target=\"_blank\">\n    <img \n      class=\"main__logo\"\n      alt=\"Paul &amp; Geoff Logo\"\n      src=\"../assets/img/paul-and-geoff-logo.svg\">\n  </a>\n</div>\n\n"
 
 /***/ }),
 
@@ -185,7 +185,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/geoff/code/personal/paulandgeoff/client/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/geoff/Documents/GitHub/paulandgeoff/client/src/main.ts */"./src/main.ts");
 
 
 /***/ })
