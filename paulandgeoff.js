@@ -7,39 +7,46 @@
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-var express = require('express');
-var http = require('http');
-var colors = require('colors/safe');
-var _ = require('lodash');
+const express = require('express');
+const http = require('http');
+const colors = require('colors/safe');
+const _ = require('lodash');
 
-var config = require('./config/environment/' + process.env.NODE_ENV);
-var expressConfig = require('./config/express');
-var routes = require('./routes');
+const config = require('./config/environment/' + process.env.NODE_ENV);
+const expressConfig = require('./config/express');
+const routes = require('./api/routes');
+const soundcloud = require('./lib/soundcloud');
+soundcloud.init();
 
 // package.json information
-var pjson = require('./package.json');
+const pjson = require('./package.json');
 
 // Setup server
-var app = express();
+const app = express();
 app.locals.title = _.startCase('paulandgeoff');
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 expressConfig(app);
 routes(app);
 
+app.use((req, res, next) => {
+  console.log(colors.blue('REQ:', req.url));
+  next();
+});
+
 // Start server 
 server.listen(config.port, function paulandgeoffServer() {
-    console.log('\n' + colors
-        .green('---------------------------------------------------------------------------'));
+  console.log('\n' + colors
+    .green('---------------------------------------------------------------------------'));
 
-    console.log(' ' + app.locals.title + ' server v' + pjson.version + ' is listening on ' +
-        colors.green('http://%s:%s') + ' in ' +
-        colors.white.bgBlue('%s') + ' mode.',
-        config.host, config.port, config.env);
+  console.log(' ' + app.locals.title + ' server v' + pjson.version + ' is listening on ' +
+    colors.green('http://%s:%s') + ' in ' +
+    colors.white.bgBlue('%s') + ' mode.',
+    config.host, config.port, config.env);
 
-    console.log(colors
-        .green('---------------------------------------------------------------------------\n'));
+  console.log(colors
+    .green('---------------------------------------------------------------------------\n'));
 });
 
 // Expose app
-exports = module.exports = app;
+module.exports = app;
