@@ -1,0 +1,14 @@
+:host {
+  margin: 1rem;
+  display: block;
+  position: relative;
+  background-size: cover;
+  img.waveform {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    left: 0;
+    top: 0;
+  }
+}
+

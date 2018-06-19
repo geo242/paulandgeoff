@@ -1,3 +1,4 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 .main {
     margin: 0 auto;
     padding-bottom: 50%;
@@ -6,11 +7,11 @@
 }
 
 .main__logo {
-    top: 25%;
-    left: 25%;
-    width: 50%;
+    //top: 25%;
+    //left: 25%;
+    //width: 50%;
     animation: float 6s ease-in-out infinite;
-    position: absolute;
+    //position: absolute;
 }
 
 @keyframes float {
@@ -23,4 +24,11 @@
 	100% {
 		transform: translatey(0px);
 	}
+}
+
+mat-toolbar {
+  .main__logo {
+    margin-top: 10px;
+    max-width: 75px;
+  }
 }

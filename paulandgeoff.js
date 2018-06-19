@@ -18,23 +18,20 @@ const routes = require('./api/routes');
 const soundcloud = require('./lib/soundcloud');
 soundcloud.init();
 
+const db = require('./lib/db');
+db.init(config);
+
 // package.json information
 const pjson = require('./package.json');
 
 // Setup server
 const app = express();
 app.locals.title = _.startCase('paulandgeoff');
-
-const server = http.createServer(app);
 expressConfig(app);
+const server = http.createServer(app);
 routes(app);
 
-app.use((req, res, next) => {
-  console.log(colors.blue('REQ:', req.url));
-  next();
-});
-
-// Start server 
+// Start server
 server.listen(config.port, function paulandgeoffServer() {
   console.log('\n' + colors
     .green('---------------------------------------------------------------------------'));

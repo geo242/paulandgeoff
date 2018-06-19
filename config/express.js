@@ -1,24 +1,26 @@
 'use strict';
 
-/**
- * Express configuration
- */
+const bodyParser = require('body-parser');
+const cors = require('./cors');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const authConfig = require('./auth');
 
-var bodyParser = require('body-parser');
+module.exports = (app) => {
+  app.use(morgan('dev'));
+  app.use(cookieParser());
+  app.use(bodyParser.json());
 
-var cors = require('./cors');
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 
-module.exports = function expressConfig(app) {
-    app.use(bodyParser.json()); // for parsing application/json
+  app.use(cors);
 
-    app.use(bodyParser.urlencoded({
-        extended: true
-    })); // for parsing application/x-www-form-urlencoded
+  authConfig(app);
 
-    app.use(cors); // enable cross-origin resource sharing
-
-    app.use('/api', function jsonResponseMiddleware(req, res, next) {
-        res.type('json');
-        next();
-    });
+  app.use('/api', (req, res, next) => {
+    res.type('json');
+    next();
+  });
 };
