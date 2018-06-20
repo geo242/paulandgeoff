@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:9000/api/'
+  apiUrl: 'http://localhost:9000/api/',
+  soundCloudId: '2b617aa4e45432b412cbe1d74f35383f'
 };
 
 /*

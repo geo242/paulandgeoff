@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {
   MatButtonModule,
   MatCardModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule,
   MatMenuModule,
   MatToolbarModule
@@ -14,6 +14,7 @@ const MATERIALS = [
   MatCardModule,
   MatMenuModule,
   MatInputModule,
+  MatIconModule,
   MatFormFieldModule
 ];
 

@@ -10,11 +10,13 @@ import { PodcastComponent } from './containers/podcast.component';
 import { PodcastEffects } from './effects';
 import { podcastReducer } from './reducers';
 import { EpisodesService } from './services/episodes.service';
+import { PlayerComponent } from './components/player.component';
 
 @NgModule({
   declarations: [
     EpisodeComponent,
-    PodcastComponent
+    PodcastComponent,
+    PlayerComponent
   ],
   imports: [
     CommonModule,

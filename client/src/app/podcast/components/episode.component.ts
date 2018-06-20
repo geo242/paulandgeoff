@@ -7,6 +7,7 @@ import { EpisodesService } from '../services/episodes.service';
   selector: 'app-episode',
   template: `
     <mat-card [style.background-image]="backgroundImageCSS">
+      <app-player [episode]="episode"></app-player>
       <h2>{{episode.created_at | date: 'shortDate'}} | {{episode.title}} |
         {{episode.duration | date: 'H:mm:ss' : '+0000'}}</h2>
       <p>{{episode.description}}</p>
