@@ -25,10 +25,7 @@ router.get('/:episodeId', async (req, res) => {
             res.json(newEpisode);
           });
       } else {
-        if (!!episode.showNotes) {
-          const converter = new showdown.Converter();
-          track.showNotesHTML = converter.makeHtml(episode.showNotes);
-        }
+        addShowNotes(track, episode);
         res.json(track);
       }
     });
@@ -40,29 +37,48 @@ router.get('/:episodeId', async (req, res) => {
   }
 });
 
-router.put('/:episodeId', isLoggedIn, (req, res) => {
-  if (!req.body || !req.body.showNotes) {
+router.put('/:episodeId', isLoggedIn, async (req, res) => {
+  if (!req.body || req.body.showNotes === undefined) {
     res.status(400).json();
     return;
   }
+  const track = await soundcloud.track(req.params.episodeId);
   Episode.findOneAndUpdate({episodeId: req.params.episodeId}, {$set: {showNotes: req.body.showNotes}}, {new: true}, (err, episode) => {
     if (!!err) {
       res.status(500).json(err);
     } else if (!episode) {
       res.status(404).json();
     } else {
-      res.json(episode);
+      res.json(addShowNotes(track, episode));
     }
   });
 });
 
 router.use('/', async (req, res) => {
   try {
-    const tracks = await soundcloud.tracks();
-    res.json(tracks);
+    let tracks = await soundcloud.tracks();
+    const ids = tracks.map(track => track.id);
+    Episode.find({'episodeId': {$in: ids}}, (err, episodes) => {
+      tracks = tracks.map(track => {
+        const episode = episodes.find(e => e.episodeId === track.id);
+        addShowNotes(track, episode);
+        return track;
+      });
+      res.json(tracks);
+    });
   } catch (e) {
     res.status(500).json(e)
   }
 });
+
+function addShowNotes(track, episode) {
+  track.showNotes = episode.showNotes || '';
+  track.showNotesHTML = '';
+  if (!!track.showNotes) {
+    const converter = new showdown.Converter();
+    track.showNotesHTML = converter.makeHtml(track.showNotes);
+  }
+  return track;
+}
 
 module.exports = router;

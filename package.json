@@ -4,7 +4,8 @@
   "main": "paulandgeoff.js",
   "scripts": {
     "start": "node paulandgeoff.js",
-    "dev": "supervisor -w \"paulandgeoff.js,api,lib\" paulandgeoff.js",
+    "dev": "supervisor -w \"paulandgeoff.js,api,lib,config\" paulandgeoff.js",
+    "dev-client": "npm start --prefix client",
     "lint": "jshint ./ --reporter node_modules/jshint-stylish-ex/stylish.js --config .jshintrc",
     "pretest": "npm run lint",
     "test": "mocha --recursive"

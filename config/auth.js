@@ -2,6 +2,8 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const User = require('../api/models/user');
+const ADMINS = ['gtripoli@gmail.com', 'paulbredenberg@gmail.com'];
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -14,11 +16,11 @@ passport.use(new GoogleStrategy({
       googleName: profile.displayName,
       googleEmail: (profile.emails || []).map((emailData) => emailData.value)[0],
       googleToken: accessToken,
-      googleId: profile.id
+      googleId: profile.id,
     };
-    User.findOneAndUpdate({googleId: profile.id}, {
-      set$: userData
-    }, {
+
+    userData.isAdmin = ADMINS.indexOf(userData.googleEmail) >= 0;
+    User.findOneAndUpdate({googleId: profile.id}, userData, {
       new: true,
       upsert: true
     }, (err, user) => {
@@ -43,20 +45,22 @@ module.exports = (app) => {
   app.use(session({
     secret: 'stuffandthings',
     resave: false,
-    saveUninitialized: true,
-    cookie: {secure: true}
+    saveUninitialized: false
   }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());
 
-  app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+  app.get('/api/me', (req, res) => {
+    res.json(req.user);
+  });
+  app.get('/api/logout', (req, res) => {
+    req.logout();
+    res.json();
+  });
+  app.get('/auth/google', passport.authenticate('google', {scope: ['openid', 'profile', 'email']}));
   app.get('/auth/google/callback',
     passport.authenticate('google', {failureRedirect: '/'}), (req, res) => {
       res.redirect('/');
     });
-  app.get('/auth/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-  });
 };
