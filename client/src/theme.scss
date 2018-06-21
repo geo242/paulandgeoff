@@ -1,0 +1,41 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$md-yella: (
+  50 : #fefce4,
+  100 : #fdf8bb,
+  200 : #fcf38e,
+  300 : #faee60,
+  400 : #f9eb3e,
+  500 : #f8e71c,
+  600 : #f7e419,
+  700 : #f6e014,
+  800 : #f5dd11,
+  900 : #f3d709,
+  A100 : #ffffff,
+  A200 : #fffce9,
+  A400 : #fff5b6,
+  A700 : #fff29c,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+$yella-primary: mat-palette($mat-deep-purple);
+$yella-accent: mat-palette($md-yella, 500, 300, A400);
+$yella-warn: mat-palette($mat-red);
+$yella-theme: mat-light-theme($yella-primary, $yella-accent, $yella-warn);
+@include angular-material-theme($yella-theme);

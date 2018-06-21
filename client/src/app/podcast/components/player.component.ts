@@ -22,8 +22,8 @@ import { Episode } from '../../../interfaces/episode';
       <button mat-icon-button mat-raised-button
               color="accent"
               (click)="togglePlayPause($event)">
-        <mat-icon *ngIf="!isPlaying">play_arrow</mat-icon>
-        <mat-icon *ngIf="isPlaying">pause</mat-icon>
+        <mat-icon color="primary" *ngIf="!isPlaying">play_arrow</mat-icon>
+        <mat-icon color="primary" *ngIf="isPlaying">pause</mat-icon>
       </button>
       <h5 class="mat-h5">{{currentTime}}</h5>
     </div>
@@ -36,7 +36,7 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
   @Input()
   public innerColor: string = 'rgba(0,0,0,0.3)';
   @Input()
-  public playedColor: string = '#000000';
+  public playedColor: string = '#5E3FB5';
   @Input()
   public outerColor: string = 'transparent';
 
