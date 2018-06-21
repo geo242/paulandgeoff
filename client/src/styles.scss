@@ -3,3 +3,13 @@ body {
 }
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+.show-notes {
+  .show-notes--body.mat-body-1 {
+    ul li p {
+      margin: 0;
+      &:not(:first-child) {
+        margin-left: 1rem;
+      }
+    }
+  }
+}

@@ -11,9 +11,9 @@ import { EpisodesService } from '../services/episodes.service';
       <div class="mat-card-content">
         <h2 class="mat-headline">{{episode.created_at | date: 'shortDate'}} | {{episode.title}} |
           {{episode.duration | date: 'H:mm:ss' : '+0000'}}</h2>
-        <p class="mat-body-2">{{episode.description}}</p>
+        <p class="description mat-body-2">{{episode.description}}</p>
         <section class="show-notes" [hidden]="!episode.showNotesHTML && isReadOnly">
-          <h3 class="mat-title" [hidden]="isEditing">Show Notes</h3>
+          <h3 class="mat-subheading-1" [hidden]="isEditing">Show Notes</h3>
           <div class="show-notes--body mat-body-1" [innerHTML]="episode.showNotesHTML"></div>
           <form [formGroup]="editForm"
                 fxLayout="column"

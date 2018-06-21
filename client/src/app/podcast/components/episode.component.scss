@@ -9,6 +9,10 @@
       padding: 1rem;
     }
   }
+  p.description {
+    color: #595959;
+    margin-left: 2rem;
+  }
   img.waveform {
     position: absolute;
     max-width: 100%;
@@ -17,7 +21,7 @@
     top: 0;
   }
   .show-notes {
-    .show-notes--body {
+    .show-notes--body.mat-body-1 {
       margin-left: 1rem;
     }
   }
