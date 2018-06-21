@@ -20,7 +20,6 @@ import { EpisodesService } from '../services/episodes.service';
                 fxLayoutAlign="start stretch"
                 *ngIf="!isReadOnly" (ngSubmit)="save()">
             <mat-form-field *ngIf="isEditing">
-              <textarea matInput formControlName="showNotes" placeholder="Show Notes"></textarea>
               <textarea matInput formControlName="showNotes" placeholder="Show Notes" rows="50"></textarea>
             </mat-form-field>
             <div fxLayout="row" fxLayoutAlign="space-between center">
