@@ -6,31 +6,33 @@ import { EpisodesService } from '../services/episodes.service';
 @Component({
   selector: 'app-episode',
   template: `
-    <mat-card [style.background-image]="backgroundImageCSS">
-      <app-player [episode]="episode"></app-player>
-      <h2>{{episode.created_at | date: 'shortDate'}} | {{episode.title}} |
-        {{episode.duration | date: 'H:mm:ss' : '+0000'}}</h2>
-      <p>{{episode.description}}</p>
-      <section [hidden]="!episode.showNotesHTML && isReadOnly">
-        <h3 [hidden]="isEditing">Show Notes</h3>
-        <div [innerHTML]="episode.showNotesHTML"></div>
-        <form [formGroup]="editForm"
-              fxLayout="column"
-              fxLayoutAlign="start stretch"
-              *ngIf="!isReadOnly" (ngSubmit)="save()">
-          <mat-form-field *ngIf="isEditing">
-            <textarea matInput formControlName="showNotes" placeholder="Show Notes"></textarea>
-          </mat-form-field>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <button type="button" mat-button (click)="toggleEditing()">
-              {{isEditing ? 'Cancel' : 'Edit'}}
-            </button>
-            <button type="submit" mat-button *ngIf="isEditing">
-              Save
-            </button>
-          </div>
-        </form>
-      </section>
+    <mat-card>
+      <app-player [episode]="episode" [(isPlaying)]="isPlaying"></app-player>
+      <div class="mat-card-content">
+        <h2 class="mat-headline">{{episode.created_at | date: 'shortDate'}} | {{episode.title}} |
+          {{episode.duration | date: 'H:mm:ss' : '+0000'}}</h2>
+        <p class="mat-body-2">{{episode.description}}</p>
+        <section class="show-notes" [hidden]="!episode.showNotesHTML && isReadOnly">
+          <h3 class="mat-title" [hidden]="isEditing">Show Notes</h3>
+          <div class="show-notes--body mat-body-1" [innerHTML]="episode.showNotesHTML"></div>
+          <form [formGroup]="editForm"
+                fxLayout="column"
+                fxLayoutAlign="start stretch"
+                *ngIf="!isReadOnly" (ngSubmit)="save()">
+            <mat-form-field *ngIf="isEditing">
+              <textarea matInput formControlName="showNotes" placeholder="Show Notes"></textarea>
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <button type="button" mat-button (click)="toggleEditing()">
+                {{isEditing ? 'Cancel' : 'Edit'}}
+              </button>
+              <button type="submit" mat-button *ngIf="isEditing">
+                Save
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
     </mat-card>`,
   styleUrls: ['./episode.component.scss'],
   host: {
@@ -44,9 +46,26 @@ export class EpisodeComponent implements OnChanges {
   public isReadOnly: boolean = true;
   @Output()
   public updateShowNotes = new EventEmitter<string>();
+  @Output()
+  public isPlayingChange = new EventEmitter<boolean>();
+
+  @Input()
+  public set isPlaying(value: boolean) {
+    if (value !== this._isPlaying) {
+      this._isPlaying = value;
+      this.isPlayingChange.emit(this.isPlaying);
+    }
+  };
+
+  public get isPlaying(): boolean {
+    return this._isPlaying;
+  }
+
   public backgroundImageCSS: string;
   public isEditing: boolean;
   public editForm: FormGroup;
+
+  private _isPlaying: boolean;
 
   constructor(private episodesService: EpisodesService,
               private formBuilder: FormBuilder) {

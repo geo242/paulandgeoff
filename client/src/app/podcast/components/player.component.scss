@@ -1,21 +1,20 @@
 :host {
   display: block;
   width: 100%;
-  height: 50px;
+  height: 92px;
   position: relative;
   .controls {
     position: absolute;
-    left: 5px;
-    z-index: 1;
+    left: 1rem;
+    top: 1rem;
     h5 {
-      margin: 0;
+      margin: 2px 0 0;
       text-align: center;
+      color: #FFF;
     }
   }
   canvas {
     position: absolute;
-    z-index: 0;
-    width: 100%;
-    height: 50px;
+    bottom: 0;
   }
 }
