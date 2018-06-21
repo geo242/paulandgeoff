@@ -9,7 +9,7 @@ const authConfig = require('./auth');
 
 module.exports = (app) => {
   if (process.env.NODE_ENV === 'production') {
-    app.use(enforce.HTTPS());
+    // app.use(enforce.HTTPS());
   }
   app.use(morgan('dev'));
   app.use(cookieParser());
