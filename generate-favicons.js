@@ -36,7 +36,7 @@ const configuration = {
   }
 };
 
-const faviconsDir = './public/assets/icons';
+const faviconsDir = './public/assets/icons/';
 if (!fs.existsSync(faviconsDir)) {
   fs.mkdirSync(faviconsDir);
 }
