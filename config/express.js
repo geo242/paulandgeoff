@@ -9,19 +9,13 @@ const authConfig = require('./auth');
 
 module.exports = (app) => {
   if (process.env.NODE_ENV === 'production') {
-    // app.use(enforce.HTTPS());
+    app.use(enforce.HTTPS());
   }
   app.use(morgan('dev'));
   app.use(cookieParser());
-  // app.use((req, res, next) => {
-  //   console.log('SESSION', req.session);
-  //   next();
-  // });
   app.use(bodyParser.json());
 
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }));
+  app.use(bodyParser.urlencoded({extended: true}));
 
   app.use(cors);
 
