@@ -14,13 +14,14 @@ import { EpisodesService } from '../services/episodes.service';
         <p class="description mat-body-2">{{episode.description}}</p>
         <section class="show-notes" [hidden]="!episode.showNotesHTML && isReadOnly">
           <h3 class="mat-subheading-1" [hidden]="isEditing">Show Notes</h3>
-          <div class="show-notes--body mat-body-1" [innerHTML]="episode.showNotesHTML"></div>
+          <div class="show-notes--body mat-body-1" [hidden]="isEditing" [innerHTML]="episode.showNotesHTML"></div>
           <form [formGroup]="editForm"
                 fxLayout="column"
                 fxLayoutAlign="start stretch"
                 *ngIf="!isReadOnly" (ngSubmit)="save()">
             <mat-form-field *ngIf="isEditing">
               <textarea matInput formControlName="showNotes" placeholder="Show Notes"></textarea>
+              <textarea matInput formControlName="showNotes" placeholder="Show Notes" rows="50"></textarea>
             </mat-form-field>
             <div fxLayout="row" fxLayoutAlign="space-between center">
               <button type="button" mat-button (click)="toggleEditing()">
