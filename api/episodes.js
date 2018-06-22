@@ -3,7 +3,15 @@ const router = express.Router();
 const soundcloud = require('../lib/soundcloud');
 const Episode = require('./models/episode');
 const showdown = require('showdown');
-
+let converter = undefined;
+const converterOptions = {
+  excludeTrailingPunctuationFromURLs: true,
+  strikethrough: true,
+  disableForced4SpacesIndentedSublists: true,
+  simpleLineBreaks: true,
+  openLinksInNewWindow: true,
+  emoji: true
+};
 // route middleware to make sure a user is logged in
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -75,7 +83,7 @@ function addShowNotes(track, episode) {
   track.showNotes = episode.showNotes || '';
   track.showNotesHTML = '';
   if (!!track.showNotes) {
-    const converter = new showdown.Converter();
+    converter = converter || new showdown.Converter(converterOptions);
     track.showNotesHTML = converter.makeHtml(track.showNotes);
   }
   return track;
