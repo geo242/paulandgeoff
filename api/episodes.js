@@ -80,7 +80,7 @@ router.use('/', async (req, res) => {
 });
 
 function addShowNotes(track, episode) {
-  track.showNotes = episode.showNotes || '';
+  track.showNotes = (episode || {}).showNotes || '';
   track.showNotesHTML = '';
   if (!!track.showNotes) {
     converter = converter || new showdown.Converter(converterOptions);
