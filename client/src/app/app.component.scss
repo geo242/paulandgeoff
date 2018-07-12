@@ -1,4 +1,6 @@
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/theming";
+@import '../theme';
+
 .main {
     margin: 0 auto;
     padding-bottom: 50%;
@@ -30,5 +32,8 @@ mat-toolbar {
   .main__logo {
     margin-top: 10px;
     max-width: 75px;
+  }
+  button {
+    color: mat-color($mat-deep-purple, 300);
   }
 }

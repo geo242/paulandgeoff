@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { EpisodeComponent } from './components/episode.component';
@@ -24,6 +25,7 @@ import { PlayerComponent } from './components/player.component';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     EffectsModule.forFeature([PodcastEffects]),
     StoreModule.forFeature('podcast', podcastReducer)
   ],

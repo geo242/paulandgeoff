@@ -10,9 +10,9 @@ import { State } from './reducers/main';
   selector: 'app-root',
   template: `
     <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between">
-      <img class="main__logo" alt="Paul &amp; Geoff Logo"
-           src="../assets/img/paul-and-geoff-logo.svg">
-      <div fxLayout="row" fxLayoutAlign="end center">
+      <!--<img class="main__logo" alt="Paul &amp; Geoff Logo"-->
+           <!--src="../assets/img/paul-and-geoff-logo.svg">-->
+      <div fxLayout="row" fxLayoutAlign="end center" fxFill>
         <button mat-button (click)="login()" *ngIf="!(isLoggedIn$ | async)">
           Login
         </button>
@@ -20,7 +20,6 @@ import { State } from './reducers/main';
           <mat-menu #appMenu="matMenu">
             <button mat-menu-item (click)="logout()">Logout</button>
           </mat-menu>
-
           <button mat-button [matMenuTriggerFor]="appMenu">
             <span>{{(currentUser$ | async)?.googleName}}</span>
           </button>

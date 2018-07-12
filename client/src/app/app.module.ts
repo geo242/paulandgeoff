@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -24,6 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     AuthenticationModule,
     PodcastModule,
+    FontAwesomeModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({

@@ -1,6 +1,59 @@
+@import "~@angular/material/theming";
+@import '../../../theme';
+
+
 :host {
-  & > h3 {
-    text-align: center;
-    margin: 2rem;
+  header {
+    margin-bottom: 2rem;
+    display: block;
+    h3 {
+      margin-top: 1rem;
+      margin-bottom: .25rem;
+    }
+    h3, h4 {
+      text-align: center;
+    }
+    .social-links {
+      width: 50%;
+      min-width: 250px;
+      margin: 0 auto;
+      a {
+        color: #4d4d4d;
+        margin-bottom: 1rem;
+        &:first-child {
+          background-color: mat-color($yella-primary, A400, 0.3);
+        }
+        background-color: mat-color($yella-accent, A400, 0.3);
+
+        &:last-child {
+          background-color: mat-color($yella-warn, A400, 0.3);
+        }
+        padding: 0 8px;
+        width: 150px;
+        fa-icon {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+
+  .main__logo {
+    width: 300px;
+    max-width: 70vw;
+    margin: 0 auto;
+    animation: float 6s ease-in-out infinite;
+    display: block;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-15px);
+  }
+  100% {
+    transform: translatey(0px);
   }
 }
