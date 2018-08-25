@@ -44,7 +44,7 @@ router.put('/:episodeId', isLoggedIn, async (req, res) => {
     res.status(400).json();
     return;
   }
-  Episode.findOneAndUpdate({episodeId: req.params.episodeId}, {$set: {showNotes: req.body.showNotes}}, (err, episode) => {
+  Episode.findOneAndUpdate({episodeId: req.params.episodeId}, {$set: {showNotes: req.body.showNotes}}, {new: true}, (err, episode) => {
     if (!!err) {
       res.status(500).json(err);
     } else if (!episode) {

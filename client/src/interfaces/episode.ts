@@ -1,5 +1,5 @@
 export interface Episode {
-  id: number;
+  episodeId: number;
   title: string;
   description: string;
   waveform_url: string;

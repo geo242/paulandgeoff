@@ -27,7 +27,7 @@ export function podcastReducer(state: PodcastState = initialPodcastState, action
     case PodcastActionType.UPDATE_SHOW_NOTES_SUCCESS:
       return {
         ...state, episodes: state.episodes.map((episode: Episode) => {
-          if (episode.id === action.episode.id) {
+          if (episode.episodeId === action.episode.episodeId) {
             return action.episode;
           }
           return episode;

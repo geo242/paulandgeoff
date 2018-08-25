@@ -1,7 +1,7 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Episode } from '../../../interfaces/episode';
 import { selectCurrentUserIsAdmin } from '../../authentication/reducers';
@@ -56,13 +56,13 @@ export class PodcastComponent {
   public episodeComponents: QueryList<EpisodeComponent>;
 
   constructor(private store: Store<State>) {
-    this.episodes$ = this.store.select(selectEpisodes);
-    this.isCurrentUserAdmin$ = this.store.select(selectCurrentUserIsAdmin);
+    this.episodes$ = this.store.pipe(select(selectEpisodes));
+    this.isCurrentUserAdmin$ = this.store.pipe(select(selectCurrentUserIsAdmin));
     this.store.dispatch(new GetAction());
   }
 
   public handleUpdateShowNotes(episode: Episode, newShowNotes: string): void {
-    this.store.dispatch(new UpdateShowNotesAction(episode.id, newShowNotes));
+    this.store.dispatch(new UpdateShowNotesAction(episode.episodeId, newShowNotes));
   }
 
   public handlePlayStateChanged(episode: Episode, isPlaying: boolean): void {
