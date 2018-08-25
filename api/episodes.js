@@ -57,10 +57,18 @@ router.put('/:episodeId', isLoggedIn, async (req, res) => {
 
 router.use('/', async (req, res) => {
   try {
-    Episode.find({}, (err, episodes) => {
-      res.json(episodes.map(episode => addShowNotes(episode)));
-    });
+    Episode
+      .find({})
+      .sort('-createdAt')
+      .exec((err, episodes) => {
+        if (!!err) {
+          res.status(500).json(err)
+        } else {
+          res.json(episodes.map(episode => addShowNotes(episode)));
+        }
+      });
   } catch (e) {
+    console.error(e);
     res.status(500).json(e)
   }
 });

@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const episodeSchema = new Schema({
   episodeId: Number,
-  createdAt: Date,
-  lastModified: Date,
+  createdAt: {type: Date},
+  lastModified: {type: Date},
   duration: Number,
   showNotes: String,
   showNotesHTML: String,
