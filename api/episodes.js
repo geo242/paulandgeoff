@@ -58,8 +58,7 @@ router.put('/:episodeId', isLoggedIn, async (req, res) => {
 router.use('/', async (req, res) => {
   try {
     Episode.find({}, (err, episodes) => {
-      episodes = episodes.map(episode => addShowNotes(episode));
-      res.json(episodes);
+      res.json(episodes.map(episode => addShowNotes(episode)));
     });
   } catch (e) {
     res.status(500).json(e)

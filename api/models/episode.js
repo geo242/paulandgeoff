@@ -7,6 +7,7 @@ const episodeSchema = new Schema({
   lastModified: Date,
   duration: Number,
   showNotes: String,
+  showNotesHTML: String,
   waveform: Schema.Types.Mixed,
   streamable: Boolean,
   description: String,
