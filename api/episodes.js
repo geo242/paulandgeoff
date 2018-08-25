@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const soundcloud = require('../lib/soundcloud');
 const Episode = require('./models/episode');
 const showdown = require('showdown');
 let converter = undefined;
@@ -22,19 +21,14 @@ const isLoggedIn = (req, res, next) => {
 
 router.get('/:episodeId', async (req, res) => {
   try {
-    const track = await soundcloud.track(req.params.episodeId);
-    if (!track) {
-      return res.status(404).json();
-    }
     Episode.findOne({episodeId: track.id}, (err, episode) => {
-      if (!episode) {
-        new Episode({episodeId: track.id})
-          .save((err, newEpisode) => {
-            res.json(newEpisode);
-          });
+      if (!!err) {
+        res.status(500).json(err);
+      } else if (!episode) {
+        res.status(404).json()
       } else {
-        addShowNotes(track, episode);
-        res.json(track);
+        addShowNotes(episode);
+        res.json(episode);
       }
     });
   } catch (e) {
@@ -50,43 +44,35 @@ router.put('/:episodeId', isLoggedIn, async (req, res) => {
     res.status(400).json();
     return;
   }
-  const track = await soundcloud.track(req.params.episodeId);
-  Episode.findOneAndUpdate({episodeId: req.params.episodeId}, {$set: {showNotes: req.body.showNotes}}, {new: true}, (err, episode) => {
+  Episode.findOneAndUpdate({episodeId: req.params.episodeId}, {$set: {showNotes: req.body.showNotes}}, (err, episode) => {
     if (!!err) {
       res.status(500).json(err);
     } else if (!episode) {
       res.status(404).json();
     } else {
-      res.json(addShowNotes(track, episode));
+      res.json(addShowNotes(episode));
     }
   });
 });
 
 router.use('/', async (req, res) => {
   try {
-    let tracks = await soundcloud.tracks();
-    const ids = tracks.map(track => track.id);
-    Episode.find({'episodeId': {$in: ids}}, (err, episodes) => {
-      tracks = tracks.map(track => {
-        const episode = episodes.find(e => e.episodeId === track.id);
-        addShowNotes(track, episode);
-        return track;
-      });
-      res.json(tracks);
+    Episode.find({}, (err, episodes) => {
+      episodes = episodes.map(episode => addShowNotes(episode));
+      res.json(episodes);
     });
   } catch (e) {
     res.status(500).json(e)
   }
 });
 
-function addShowNotes(track, episode) {
-  track.showNotes = (episode || {}).showNotes || '';
-  track.showNotesHTML = '';
-  if (!!track.showNotes) {
+function addShowNotes(episode) {
+  episode.showNotesHTML = '';
+  if (!!episode.showNotes) {
     converter = converter || new showdown.Converter(converterOptions);
-    track.showNotesHTML = converter.makeHtml(track.showNotes);
+    episode.showNotesHTML = converter.makeHtml(episode.showNotes);
   }
-  return track;
+  return episode;
 }
 
 module.exports = router;

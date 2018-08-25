@@ -32,7 +32,8 @@ export class EpisodesService {
   }
 
   private transformEpisodeData = (data: any = {}): Episode => {
-    data.created_at = new Date(data.created_at);
+    data.createdAt = new Date(data.createdAt);
+    data.lastModified = new Date(data.lastModified);
     return data;
   }
 }

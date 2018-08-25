@@ -120,7 +120,7 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
       this.audioElement.addEventListener('timeupdate', () => {
         this.updateUI();
       });
-      this.audioElement.src = `${this.episode.stream_url}?client_id=${environment.soundCloudId}`;
+      this.audioElement.src = `${this.episode.streamUrl}?client_id=${environment.soundCloudId}`;
     }
 
     if (!this.waveformContext && !!this.waveformCanvasRef.nativeElement) {
@@ -141,7 +141,7 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
   }
 
   private drawWaveform(): void {
-    if (!this.waveformCanvasRef.nativeElement || !this.episode || !this.episode.waveform_data) {
+    if (!this.waveformCanvasRef.nativeElement || !this.episode || !this.episode.waveform) {
       return;
     }
     const canvasElement = this.waveformCanvasRef.nativeElement as HTMLCanvasElement;
@@ -149,7 +149,7 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
     this.waveformContext = canvasElement.getContext('2d');
     const width = this.waveformCanvasRef.nativeElement.clientWidth;
     const height = this.waveformCanvasRef.nativeElement.height;
-    this.waveformData = this.interpolateWaveformData(this.episode.waveform_data.samples, width);
+    this.waveformData = this.interpolateWaveformData(this.episode.waveform.samples, width);
 
     this.waveformContext.clearRect(0, 0, width, height);
 

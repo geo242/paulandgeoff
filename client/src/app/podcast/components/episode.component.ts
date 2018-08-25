@@ -9,7 +9,7 @@ import { EpisodesService } from '../services/episodes.service';
     <mat-card>
       <app-player [episode]="episode" [(isPlaying)]="isPlaying"></app-player>
       <div class="mat-card-content">
-        <h2 class="mat-headline">{{episode.created_at | date: 'shortDate'}} | {{episode.title}} |
+        <h2 class="mat-headline">{{episode.createdAt | date: 'shortDate'}} | {{episode.title}} |
           {{episode.duration | date: 'H:mm:ss' : '+0000'}}</h2>
         <p class="description mat-body-2">{{episode.description}}</p>
         <section class="show-notes" [hidden]="!episode.showNotesHTML && isReadOnly">

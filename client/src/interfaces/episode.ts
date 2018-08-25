@@ -3,14 +3,15 @@ export interface Episode {
   title: string;
   description: string;
   waveform_url: string;
-  waveform_data: {
+  waveform: {
     width: number;
     height: number;
     samples: number[];
   };
-  stream_url: string;
+  streamUrl: string;
   streamable: boolean;
-  created_at: Date;
+  createdAt: Date;
+  lastModified: Date;
   duration: number;
   showNotes: string;
   showNotesHTML: string;
