@@ -1,6 +1,4 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Episode } from '../../../interfaces/episode';
@@ -19,24 +17,7 @@ import { selectEpisodes } from '../reducers';
       <h3 class="mat-subheading-2">
         A podcast about finding a topic to make a podcast about.
       </h3>
-      <h4 class="mat-subheading-1">Created by Paul Bredenberg and Geoff Tripoli.</h4>
-
-      <div class="social-links" fxLayout="row wrap" fxLayoutAlign="space-around">
-        <a mat-raised-button href="https://twitter.com/pbredenberg" target="_blank">
-          <fa-icon [icon]="twitterIcon"></fa-icon>
-          Paul Bredenberg
-        </a>
-
-        <a mat-raised-button href="https://twitter.com/GeoffTripoli" target="_blank">
-          <fa-icon [icon]="twitterIcon"></fa-icon>
-          Geoff Tripoli
-        </a>
-
-        <a mat-raised-button href="https://www.instagram.com/paulandgeoff/" target="_blank">
-          <fa-icon [icon]="instagramIcon"></fa-icon>
-          Follow Us!
-        </a>
-      </div>
+      <h4 class="mat-caption">Created by Paul Bredenberg and Geoff Tripoli.</h4>
 
     </header>
     <app-episode *ngFor="let episode of episodes$ | async"
@@ -49,8 +30,7 @@ import { selectEpisodes } from '../reducers';
 export class PodcastComponent {
   public episodes$: Observable<Episode[]>;
   public isCurrentUserAdmin$: Observable<boolean>;
-  public instagramIcon = faInstagram;
-  public twitterIcon = faTwitter;
+
 
   @ViewChildren(EpisodeComponent)
   public episodeComponents: QueryList<EpisodeComponent>;

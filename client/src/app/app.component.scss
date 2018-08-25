@@ -33,7 +33,8 @@ mat-toolbar {
     margin-top: 10px;
     max-width: 75px;
   }
-  button {
+
+  button.button--account {
     color: mat-color($mat-deep-purple, 300);
   }
 }

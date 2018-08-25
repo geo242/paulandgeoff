@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from '../interfaces/user';
@@ -9,22 +10,62 @@ import { State } from './reducers/main';
 @Component({
   selector: 'app-root',
   template: `
-    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between">
+    <mat-toolbar color="primary" fxLayout="row">
       <!--<img class="main__logo" alt="Paul &amp; Geoff Logo"-->
-           <!--src="../assets/img/paul-and-geoff-logo.svg">-->
-      <div fxLayout="row" fxLayoutAlign="end center" fxFill>
-        <button mat-button (click)="login()" *ngIf="!(isLoggedIn$ | async)">
-          Login
+      <!--src="../assets/img/paul-and-geoff-logo.svg">-->
+      <div class="social-links" fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <a mat-button href="https://twitter.com/pbredenberg" target="_blank" fxHide.lt-sm>
+          <fa-icon [icon]="twitterIcon"></fa-icon>
+          Paul Bredenberg
+        </a>
+        <a mat-button href="https://twitter.com/GeoffTripoli" target="_blank" fxHide.lt-sm>
+          <fa-icon [icon]="twitterIcon"></fa-icon>
+          Geoff Tripoli
+        </a>
+
+        <mat-menu #twitterMenu="matMenu">
+          <a mat-menu-item href="https://twitter.com/pbredenberg" target="_blank">
+            <fa-icon [icon]="twitterIcon"></fa-icon>
+            Paul Bredenberg
+          </a>
+          <a mat-menu-item href="https://twitter.com/GeoffTripoli" target="_blank">
+            <fa-icon [icon]="twitterIcon"></fa-icon>
+            Geoff Tripoli
+          </a>
+        </mat-menu>
+
+        <button mat-icon-button [matMenuTriggerFor]="twitterMenu" fxHide.gt-xs>
+          <fa-icon [icon]="twitterIcon"></fa-icon>
         </button>
-        <ng-container *ngIf="isLoggedIn$ | async">
-          <mat-menu #appMenu="matMenu">
-            <button mat-menu-item (click)="logout()">Logout</button>
-          </mat-menu>
-          <button mat-button [matMenuTriggerFor]="appMenu">
-            <span>{{(currentUser$ | async)?.googleName}}</span>
-          </button>
-        </ng-container>
+
+        <a mat-button href="https://www.instagram.com/paulandgeoff/" target="_blank" fxHide.lt-sm>
+          <fa-icon [icon]="instagramIcon"></fa-icon>
+          Follow Us!
+        </a>
+        <a mat-icon-button href="https://www.instagram.com/paulandgeoff/" target="_blank" fxHide.gt-xs>
+          <fa-icon [icon]="instagramIcon"></fa-icon>
+        </a>
+
+        <a mat-button href="https://www.youtube.com/channel/UC2Rj01Bq-BM9SgLZJLrtBiw" target="_blank" fxHide.lt-sm>
+          <fa-icon [icon]="youtubeIcon"></fa-icon>
+          Subscribe!
+        </a>
+        <a mat-icon-button href="https://www.youtube.com/channel/UC2Rj01Bq-BM9SgLZJLrtBiw" target="_blank" fxHide.gt-xs>
+          <fa-icon [icon]="youtubeIcon"></fa-icon>
+        </a>
       </div>
+
+      <button class="button--account" mat-button (click)="login()" *ngIf="!(isLoggedIn$ | async)">
+        Login
+      </button>
+      <ng-container *ngIf="isLoggedIn$ | async">
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+        <button class="button--account" mat-button [matMenuTriggerFor]="appMenu">
+          <span>{{(currentUser$ | async)?.googleName}}</span>
+        </button>
+      </ng-container>
     </mat-toolbar>
 
     <router-outlet></router-outlet>`,
@@ -33,6 +74,10 @@ import { State } from './reducers/main';
 export class AppComponent implements OnInit {
   public isLoggedIn$: Observable<boolean>;
   public currentUser$: Observable<User>;
+
+  public instagramIcon = faInstagram;
+  public twitterIcon = faTwitter;
+  public youtubeIcon = faYoutube;
 
   constructor(private store: Store<State>) {
     this.isLoggedIn$ = this.store.select(selectIsLoggedIn);
