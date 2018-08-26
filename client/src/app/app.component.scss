@@ -33,6 +33,14 @@ mat-toolbar {
     margin-top: 10px;
     max-width: 75px;
   }
+  .social-links {
+    fa-icon {
+      font-size: 1.3em;
+    }
+    a, button {
+      padding: 0 8px;
+    }
+  }
 
   button.button--account {
     color: mat-color($mat-deep-purple, 300);

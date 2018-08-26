@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/pro-regular-svg-icons/faEnvelope';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from '../interfaces/user';
@@ -37,10 +38,18 @@ import { State } from './reducers/main';
         <button mat-icon-button [matMenuTriggerFor]="twitterMenu" fxHide.gt-xs>
           <fa-icon [icon]="twitterIcon"></fa-icon>
         </button>
+        
+        <a mat-button href="mailto:us@paulandgeoff.com" fxHide.lt-sm>
+          <fa-icon [icon]="emailIcon"></fa-icon>
+          Email
+        </a>
+        <a mat-icon-button href="mailto:us@paulandgeoff.com" fxHide.gt-xs>
+          <fa-icon [icon]="emailIcon"></fa-icon>
+        </a>
 
         <a mat-button href="https://www.instagram.com/paulandgeoff/" target="_blank" fxHide.lt-sm>
           <fa-icon [icon]="instagramIcon"></fa-icon>
-          Follow Us!
+          Follow Us
         </a>
         <a mat-icon-button href="https://www.instagram.com/paulandgeoff/" target="_blank" fxHide.gt-xs>
           <fa-icon [icon]="instagramIcon"></fa-icon>
@@ -48,7 +57,7 @@ import { State } from './reducers/main';
 
         <a mat-button href="https://www.youtube.com/channel/UC2Rj01Bq-BM9SgLZJLrtBiw" target="_blank" fxHide.lt-sm>
           <fa-icon [icon]="youtubeIcon"></fa-icon>
-          Subscribe!
+          Subscribe
         </a>
         <a mat-icon-button href="https://www.youtube.com/channel/UC2Rj01Bq-BM9SgLZJLrtBiw" target="_blank" fxHide.gt-xs>
           <fa-icon [icon]="youtubeIcon"></fa-icon>
@@ -78,6 +87,7 @@ export class AppComponent implements OnInit {
   public instagramIcon = faInstagram;
   public twitterIcon = faTwitter;
   public youtubeIcon = faYoutube;
+  public emailIcon = faEnvelope;
 
   constructor(private store: Store<State>) {
     this.isLoggedIn$ = this.store.select(selectIsLoggedIn);
