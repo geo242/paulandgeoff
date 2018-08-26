@@ -7,11 +7,16 @@ body {
 
 .show-notes {
   .show-notes--body.mat-body-1 {
+    img {
+      max-width: 200px;
+      max-height: 200px;
+    }
     ul li p {
       margin: 0;
       &:not(:first-child) {
         margin-left: 1rem;
       }
+
     }
   }
 }
