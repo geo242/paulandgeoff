@@ -48,8 +48,8 @@ module.exports = (app) => {
     secret: 'stuffandthings',
     resave: false,
     cookie: {
-      secure: process.env.NODE_ENV === 'production',
-      expires: false
+      secure: false,
+      maxAge: 7776000000
     },
     saveUninitialized: true,
     store: new MongoStore({mongooseConnection: mongoose.connection})
