@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/pro-regular-svg-icons/faEnvelope';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from '../interfaces/user';
-import { GetUserAction, LoginAction, LogoutAction } from './authentication/actions';
+import { GetSessionAction, GetUserAction, LoginAction, LogoutAction } from './authentication/actions';
 import { selectCurrentUser, selectIsLoggedIn } from './authentication/reducers';
 import { State } from './reducers/main';
 
@@ -90,8 +90,9 @@ export class AppComponent implements OnInit {
   public emailIcon = faEnvelope;
 
   constructor(private store: Store<State>) {
-    this.isLoggedIn$ = this.store.select(selectIsLoggedIn);
-    this.currentUser$ = this.store.select(selectCurrentUser);
+    this.isLoggedIn$ = this.store.pipe(select(selectIsLoggedIn));
+    this.currentUser$ = this.store.pipe(select(selectCurrentUser));
+    this.store.dispatch(new GetSessionAction());
   }
 
   public login(): void {

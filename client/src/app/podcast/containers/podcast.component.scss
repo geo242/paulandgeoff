@@ -17,11 +17,12 @@
   }
 
   .main__logo {
-    width: 300px;
-    max-width: 70vw;
-    margin: 0 auto;
-    animation: float 6s ease-in-out infinite;
     display: block;
+    .main__logo-image {
+      width: 300px;
+      animation: float 6s ease-in-out infinite;
+      margin: 0 auto;
+    }
   }
 }
 

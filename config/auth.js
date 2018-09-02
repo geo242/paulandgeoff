@@ -1,9 +1,11 @@
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../api/models/user');
 const ADMINS = ['gtripoli@gmail.com', 'paulbredenberg@gmail.com'];
+const mongoose = require('mongoose');
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -45,7 +47,12 @@ module.exports = (app) => {
   app.use(session({
     secret: 'stuffandthings',
     resave: false,
-    saveUninitialized: false
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      expires: false
+    },
+    saveUninitialized: true,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
   }));
   app.use(passport.initialize());
   app.use(passport.session());

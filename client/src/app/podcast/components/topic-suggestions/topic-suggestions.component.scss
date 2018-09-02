@@ -1,0 +1,20 @@
+:host {
+  display: block;
+  position: relative;
+  max-width: 300px;
+  .mat-list-item {
+    max-width: 200px;
+  }
+  .busy-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #FFF;
+    opacity: .8;
+    z-index: 1111;
+  }
+}
+
+

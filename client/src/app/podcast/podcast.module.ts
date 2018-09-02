@@ -12,12 +12,15 @@ import { PodcastEffects } from './effects';
 import { podcastReducer } from './reducers';
 import { EpisodesService } from './services/episodes.service';
 import { PlayerComponent } from './components/player.component';
+import { TopicSuggestionsComponent } from './components/topic-suggestions/topic-suggestions.component';
+import { TopicSuggestionsService } from './services/topic-suggestions.service';
 
 @NgModule({
   declarations: [
     EpisodeComponent,
     PodcastComponent,
-    PlayerComponent
+    PlayerComponent,
+    TopicSuggestionsComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { PlayerComponent } from './components/player.component';
     PodcastComponent
   ],
   providers: [
-    EpisodesService
+    EpisodesService,
+    TopicSuggestionsService
   ]
 })
 export class PodcastModule {}

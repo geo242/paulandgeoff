@@ -20,3 +20,7 @@ body {
     }
   }
 }
+
+app-topic-suggestions .mat-list[dense] .mat-list-item .mat-list-item-content {
+  padding-right: 4px;
+}
