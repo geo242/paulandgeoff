@@ -80,14 +80,26 @@ export const selectAllTopicSuggestions = createSelector(selectPodcastState,
   (state: PodcastState) => state.topicSuggestions || []);
 export const selectTopicSuggestions = createSelector(selectAllTopicSuggestions,
   selectSession,
-  selectTopicDisplayLimit,
-  (topicSuggestions: TopicSuggestion[], session: Session, topicLimit: number) => {
-    let results = topicSuggestions.map((ts: TopicSuggestion) => {
+  (topicSuggestions: TopicSuggestion[], session: Session) => {
+    return topicSuggestions.map((ts: TopicSuggestion) => {
       ts.isMyVote = ts.id === session.topicVoteId;
       return ts;
-    })
-                                  .sort((t1: TopicSuggestion, t2: TopicSuggestion) => t1.votes > t2.votes ? -1 : t1.votes < t2.votes ? 1 : 0);
-    if (!!topicLimit) {
+    }).sort((t1: TopicSuggestion, t2: TopicSuggestion) => t1.votes > t2.votes ? -1 : t1.votes < t2.votes ? 1 : 0);
+  });
+
+export const selectIncompleteTopicSuggestions = createSelector(selectTopicSuggestions, selectTopicDisplayLimit,
+  (suggestions: TopicSuggestion[], topicLimit: number) => {
+    let results = (suggestions || []).filter(t => !t.isComplete);
+    if (!!topicLimit && results.length > topicLimit) {
+      results = results.slice(0, topicLimit);
+    }
+    return results;
+  });
+
+export const selectCompleteTopicSuggestions = createSelector(selectTopicSuggestions, selectTopicDisplayLimit,
+  (suggestions: TopicSuggestion[], topicLimit: number) => {
+    let results = (suggestions || []).filter(t => t.isComplete);
+    if (!!topicLimit && results.length > topicLimit) {
       results = results.slice(0, topicLimit);
     }
     return results;

@@ -7,4 +7,5 @@ export interface TopicSuggestion {
   createdAt: Date;
   updatedAt: Date;
   isMyVote?: boolean;
+  isComplete?: boolean;
 }

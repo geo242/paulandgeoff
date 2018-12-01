@@ -14,7 +14,8 @@ import {
 } from '../actions';
 import { EpisodeComponent } from '../components/episode.component';
 import {
-  selectEpisodes,
+  selectCompleteTopicSuggestions,
+  selectEpisodes, selectIncompleteTopicSuggestions,
   selectIsTopicSuggestionsBusy,
   selectShowShowAllButton,
   selectTopicSuggestions
@@ -33,6 +34,7 @@ import {
           class="mat-elevation-z2"
           [isBusy]="isTopicSuggestionsBusy$ | async"
           [suggestions]="topicSuggestions$ | async"
+          [completeSuggestions]="completeTopicSuggestions$ | async"
           [canShowAll]="showShowAllButton$ | async"
           (showAll)="handleShowAll()"
           (vote)="handleVote($event)"
@@ -58,6 +60,7 @@ export class PodcastComponent {
   public isCurrentUserAdmin$: Observable<boolean>;
   public isTopicSuggestionsBusy$: Observable<boolean>;
   public topicSuggestions$: Observable<TopicSuggestion[]>;
+  public completeTopicSuggestions$: Observable<TopicSuggestion[]>;
   public showShowAllButton$: Observable<boolean>;
 
   @ViewChildren(EpisodeComponent)
@@ -67,7 +70,8 @@ export class PodcastComponent {
     this.episodes$ = this.store.pipe(select(selectEpisodes));
     this.isCurrentUserAdmin$ = this.store.pipe(select(selectCurrentUserIsAdmin));
     this.isTopicSuggestionsBusy$ = this.store.pipe(select(selectIsTopicSuggestionsBusy));
-    this.topicSuggestions$ = this.store.pipe(select(selectTopicSuggestions));
+    this.topicSuggestions$ = this.store.pipe(select(selectIncompleteTopicSuggestions));
+    this.completeTopicSuggestions$ = this.store.pipe(select(selectCompleteTopicSuggestions));
     this.showShowAllButton$ = this.store.pipe(select(selectShowShowAllButton));
     this.store.dispatch(new GetAction());
     this.store.dispatch(new GetTopicSuggestionsAction());

@@ -24,3 +24,7 @@ body {
 app-topic-suggestions .mat-list[dense] .mat-list-item .mat-list-item-content {
   padding-right: 4px;
 }
+
+app-topic-suggestions .mat-list[dense].complete {
+  opacity: .5;
+}

@@ -15,6 +15,12 @@
     opacity: .8;
     z-index: 1111;
   }
+  h3, h4, h5 {
+    text-align: center;
+    margin: .5rem 0 0;
+    &.complete {
+      opacity: .5;
+    }
+  }
 }
-
 
