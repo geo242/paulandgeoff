@@ -35,15 +35,17 @@ import { TopicSuggestion } from '../../../../interfaces/topic-suggestion';
           </button>
         </mat-list-item>
       </mat-list>
-      <mat-divider></mat-divider>
-      <h5 class="complete">Completed</h5>
-      <mat-list dense class="complete">
-        <mat-list-item *ngFor="let suggestion of completeSuggestions"
-                       matBadge="{{suggestion.votes}}"
-                       matBadgePosition="above before">
-          <span matLine>{{suggestion.topic}}</span>
-        </mat-list-item>
-      </mat-list>
+      <ng-container *ngIf="!!completeSuggestions.length">
+        <mat-divider></mat-divider>
+        <h4 class="complete mat-subheading-1">Completed</h4>
+        <mat-list dense class="complete">
+          <mat-list-item *ngFor="let suggestion of completeSuggestions"
+                         matBadge="{{suggestion.votes}}"
+                         matBadgePosition="above before">
+            <span matLine>{{suggestion.topic}}</span>
+          </mat-list-item>
+        </mat-list>
+      </ng-container>
       <button mat-button *ngIf="!isAdding"
               color="primary"
               (click)="toggleAdding()">Suggest a topic!
