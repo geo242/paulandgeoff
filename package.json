@@ -9,7 +9,7 @@
     "lint": "jshint ./ --reporter node_modules/jshint-stylish-ex/stylish.js --config .jshintrc",
     "pretest": "npm run lint",
     "test": "mocha --recursive",
-    "build": "npm run build --prefix client && node generate-favicons.js",
+    "build": "cd client && npm run build && node generate-favicons.js",
     "postinstall": "npm install --prefix client"
   },
   "dependencies": {
