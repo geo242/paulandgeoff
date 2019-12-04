@@ -40,9 +40,9 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
   @Input()
   public outerColor: string = 'transparent';
 
-  @ViewChild('audioElement')
+  @ViewChild('audioElement', { static: true })
   public audioElementRef: ElementRef;
-  @ViewChild('waveformCanvas')
+  @ViewChild('waveformCanvas', { static: true })
   public waveformCanvasRef: ElementRef;
 
   @Output()
