@@ -1,7 +1,8 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef, EventEmitter,
+  ElementRef,
+  EventEmitter,
   HostListener,
   Input,
   OnChanges,
@@ -9,7 +10,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { Subject } from 'rxjs/internal/Subject';
+import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Episode } from '../../../interfaces/episode';
@@ -34,11 +35,11 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
   @Input()
   public episode: Episode;
   @Input()
-  public innerColor: string = 'rgba(0,0,0,0.3)';
+  public innerColor = 'rgba(0,0,0,0.3)';
   @Input()
-  public playedColor: string = '#5E3FB5';
+  public playedColor = '#5E3FB5';
   @Input()
-  public outerColor: string = 'transparent';
+  public outerColor = 'transparent';
 
   @ViewChild('audioElement', { static: true })
   public audioElementRef: ElementRef;
@@ -47,21 +48,7 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
 
   @Output()
   public isPlayingChange = new EventEmitter<boolean>();
-
-  @Input()
-  public set isPlaying(value: boolean) {
-    if (value !== this._isPlaying) {
-      this._isPlaying = value;
-      this.togglePlayPause();
-    }
-  };
-
-  public get isPlaying(): boolean {
-    return this._isPlaying;
-  }
-
   public currentTime: string;
-
   private _isPlaying: boolean;
   private isInitialized: boolean;
   private audioElement: HTMLAudioElement;
@@ -72,6 +59,18 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
                                  .pipe(debounceTime(100));
 
   constructor(private hostElementRef: ElementRef) { }
+
+  public get isPlaying(): boolean {
+    return this._isPlaying;
+  }
+
+  @Input()
+  public set isPlaying(value: boolean) {
+    if (value !== this._isPlaying) {
+      this._isPlaying = value;
+      this.togglePlayPause();
+    }
+  }
 
   @HostListener('window:resize', ['$event'])
   public onResize(ev: any) {
@@ -114,7 +113,7 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
 
   private init(): void {
     if (!this.isInitialized && !!this.episode && this.episode.streamable
-      && !!this.audioElementRef && !!this.audioElementRef.nativeElement) {
+        && !!this.audioElementRef && !!this.audioElementRef.nativeElement) {
       this.isInitialized = true;
       this.audioElement = this.audioElementRef.nativeElement as HTMLAudioElement;
       this.audioElement.addEventListener('timeupdate', () => {
@@ -126,10 +125,7 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
     if (!this.waveformContext && !!this.waveformCanvasRef.nativeElement) {
 
       this.drawWaveform();
-      this.resizeObservable
-          .subscribe(() => {
-            this.updateUI();
-          })
+      this.resizeObservable.subscribe(() => this.updateUI());
     }
     this.updateUI();
   }
@@ -182,12 +178,12 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
   }
 
   private prettyTime(value): string {
-    let hours = Math.floor(value / 3600),
-        mins  = '0' + Math.floor((value % 3600) / 60),
-        secs  = '0' + Math.floor((value % 60));
+    const hours = Math.floor(value / 3600);
+    let mins = '0' + Math.floor((value % 3600) / 60);
+    let secs = '0' + Math.floor((value % 60));
     mins = mins.substr(mins.length - 2);
     secs = secs.substr(secs.length - 2);
-    if (!isNaN(parseInt(secs))) {
+    if (!isNaN(parseInt(secs, 10))) {
       if (hours) {
         return hours + ':' + mins + ':' + secs;
       } else {
@@ -196,8 +192,7 @@ export class PlayerComponent implements OnChanges, AfterViewInit {
     } else {
       return '00:00';
     }
-    ;
-  };
+  }
 
   private async seek(locationX: number): Promise<any> {
     if (!this.audioElement) {

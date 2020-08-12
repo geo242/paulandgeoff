@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs/internal/observable/of';
+import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Episode } from '../../../interfaces/episode';
 import { TopicSuggestion } from '../../../interfaces/topic-suggestion';

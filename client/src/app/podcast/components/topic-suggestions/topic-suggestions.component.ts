@@ -84,7 +84,7 @@ export class TopicSuggestionsComponent implements OnInit, OnChanges {
   public vote = new EventEmitter<TopicSuggestion>();
   @Output()
   public showAll = new EventEmitter();
-  @ViewChild('topicInput', { static: false })
+  @ViewChild('topicInput')
   public topicInput: ElementRef;
   public voteIcon = faThumbsUp;
 
