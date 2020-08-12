@@ -42,8 +42,8 @@
     "supervisor": "^0.12.0"
   },
   "engines": {
-    "node": "8.11.x",
-    "npm": "6.0.x"
+    "node": "10.x.x",
+    "npm": "6.x.x"
   },
   "devDependencies": {
     "favicons": "^5.5.0"
