@@ -82,8 +82,7 @@ export const selectTopicSuggestions = createSelector(selectAllTopicSuggestions,
   selectSession,
   (topicSuggestions: TopicSuggestion[], session: Session) => {
     return topicSuggestions.map((ts: TopicSuggestion) => {
-      ts.isMyVote = ts.id === session.topicVoteId;
-      return ts;
+      return {...ts, isMyVote: ts.id === session.topicVoteId};
     }).sort((t1: TopicSuggestion, t2: TopicSuggestion) => t1.votes > t2.votes ? -1 : t1.votes < t2.votes ? 1 : 0);
   });
 
