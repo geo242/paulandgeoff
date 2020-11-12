@@ -1,16 +1,5 @@
-import {
-  Component, ContentChild,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { faThumbsUp } from '@fortawesome/pro-solid-svg-icons/faThumbsUp';
 import { TopicSuggestion } from '../../../../interfaces/topic-suggestion';
 
 @Component({
@@ -23,15 +12,15 @@ import { TopicSuggestion } from '../../../../interfaces/topic-suggestion';
       <button mat-button *ngIf="canShowAll" (click)="handleShowAll()">Show All</button>
       <mat-list dense>
         <mat-list-item *ngFor="let suggestion of suggestions"
-                       matTooltip="{{suggestion.topic}}"
+                       matTooltip="{{suggestion.topic}}{{suggestion.isMyVote ? ' (Already Voted)' : ''}}"
                        matTooltipPosition="above"
                        matTooltipShowDelay="1000"
                        matBadge="{{suggestion.votes}}"
                        matBadgeColor="accent"
                        matBadgePosition="above before">
-          <span matLine>{{suggestion.topic}}</span>
-          <button mat-icon-button (click)="handleVote(suggestion)" *ngIf="!suggestion.isMyVote">
-            <fa-icon [icon]="voteIcon"></fa-icon>
+          <span matLine>{{suggestion.topic | case}}</span>
+          <button mat-icon-button (click)="handleVote(suggestion)" [disabled]="suggestion.isMyVote">
+            <i class="fad fa-thumbs-up"></i>
           </button>
         </mat-list-item>
       </mat-list>
@@ -86,7 +75,6 @@ export class TopicSuggestionsComponent implements OnInit, OnChanges {
   public showAll = new EventEmitter();
   @ViewChild('topicInput')
   public topicInput: ElementRef;
-  public voteIcon = faThumbsUp;
 
   constructor(private formBuilder: FormBuilder) {
     this.topicControl = new FormControl(undefined, [Validators.required, Validators.maxLength(500)]);

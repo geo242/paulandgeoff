@@ -8,24 +8,25 @@ import { State } from '../../reducers/main';
 import {
   AddTopicSuggestionAction,
   GetAction,
-  GetTopicSuggestionsAction, ShowAllTopicSuggestionsAction,
+  GetTopicSuggestionsAction,
+  ShowAllTopicSuggestionsAction,
   TopicVoteAction,
   UpdateShowNotesAction
 } from '../actions';
 import { EpisodeComponent } from '../components/episode.component';
 import {
   selectCompleteTopicSuggestions,
-  selectEpisodes, selectIncompleteTopicSuggestions,
+  selectEpisodes,
+  selectIncompleteTopicSuggestions,
   selectIsTopicSuggestionsBusy,
-  selectShowShowAllButton,
-  selectTopicSuggestions
+  selectShowShowAllButton
 } from '../reducers';
 
 @Component({
   selector: 'app-podcast',
   template: `
     <header>
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="center center" fxLayoutAlign="space-around">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.xs="center center" fxLayoutAlign="space-around start">
         <div class="main__logo">
           <img class="main__logo-image" alt="Paul &amp; Geoff Logo"
                src="../assets/img/paul-and-geoff-logo.svg">
@@ -100,6 +101,6 @@ export class PodcastComponent {
   }
 
   public handleShowAll(): void {
-    this.store.dispatch(new ShowAllTopicSuggestionsAction())
+    this.store.dispatch(new ShowAllTopicSuggestionsAction());
   }
 }

@@ -1,9 +1,12 @@
+$fa-font-path: '../../assets/fonts';
 
 body {
   margin: 0;
 }
-//@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import './theme.scss';
+@import './styles/fontawesome/fontawesome';
+@import './styles/fontawesome/duotone';
+@import './styles/fontawesome/brands';
 
 .show-notes {
   .show-notes--body.mat-body-1 {

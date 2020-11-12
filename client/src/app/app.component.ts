@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/pro-regular-svg-icons/faEnvelope';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from '../interfaces/user';
@@ -16,51 +14,51 @@ import { State } from './reducers/main';
       <!--src="../assets/img/paul-and-geoff-logo.svg">-->
       <div class="social-links" fxFlex fxLayout="row" fxLayoutAlign="start center">
         <a mat-button href="https://twitter.com/pbredenberg" target="_blank" fxHide.lt-sm>
-          <fa-icon [icon]="twitterIcon"></fa-icon>
+          <i class="fab fa-twitter"></i>
           Paul Bredenberg
         </a>
         <a mat-button href="https://twitter.com/GeoffTripoli" target="_blank" fxHide.lt-sm>
-          <fa-icon [icon]="twitterIcon"></fa-icon>
+          <i class="fab fa-twitter"></i>
           Geoff Tripoli
         </a>
 
         <mat-menu #twitterMenu="matMenu">
           <a mat-menu-item href="https://twitter.com/pbredenberg" target="_blank">
-            <fa-icon [icon]="twitterIcon"></fa-icon>
+            <i class="fab fa-twitter"></i>
             Paul Bredenberg
           </a>
           <a mat-menu-item href="https://twitter.com/GeoffTripoli" target="_blank">
-            <fa-icon [icon]="twitterIcon"></fa-icon>
+            <i class="fab fa-twitter"></i>
             Geoff Tripoli
           </a>
         </mat-menu>
 
         <button mat-icon-button [matMenuTriggerFor]="twitterMenu" fxHide.gt-xs>
-          <fa-icon [icon]="twitterIcon"></fa-icon>
+          <i class="fab fa-twitter"></i>
         </button>
-        
+
         <a mat-button href="mailto:us@paulandgeoff.com" fxHide.lt-sm>
-          <fa-icon [icon]="emailIcon"></fa-icon>
+          <i class="fad fa-envelope"></i>
           Email
         </a>
         <a mat-icon-button href="mailto:us@paulandgeoff.com" fxHide.gt-xs>
-          <fa-icon [icon]="emailIcon"></fa-icon>
+          <i class="fad fa-envelope"></i>
         </a>
 
         <a mat-button href="https://www.instagram.com/paulandgeoff/" target="_blank" fxHide.lt-sm>
-          <fa-icon [icon]="instagramIcon"></fa-icon>
+          <i class="fab fa-instagram"></i>
           Follow Us
         </a>
         <a mat-icon-button href="https://www.instagram.com/paulandgeoff/" target="_blank" fxHide.gt-xs>
-          <fa-icon [icon]="instagramIcon"></fa-icon>
+          <i class="fab fa-instagram"></i>
         </a>
 
         <a mat-button href="https://www.youtube.com/channel/UC2Rj01Bq-BM9SgLZJLrtBiw" target="_blank" fxHide.lt-sm>
-          <fa-icon [icon]="youtubeIcon"></fa-icon>
+          <i class="fab fa-youtube"></i>
           Subscribe
         </a>
         <a mat-icon-button href="https://www.youtube.com/channel/UC2Rj01Bq-BM9SgLZJLrtBiw" target="_blank" fxHide.gt-xs>
-          <fa-icon [icon]="youtubeIcon"></fa-icon>
+          <i class="fab fa-youtube"></i>
         </a>
       </div>
 
@@ -84,10 +82,10 @@ export class AppComponent implements OnInit {
   public isLoggedIn$: Observable<boolean>;
   public currentUser$: Observable<User>;
 
-  public instagramIcon = faInstagram;
-  public twitterIcon = faTwitter;
-  public youtubeIcon = faYoutube;
-  public emailIcon = faEnvelope;
+  // public instagramIcon = faInstagram;
+  // public twitterIcon = faTwitter;
+  // public youtubeIcon = faYoutube;
+  // public emailIcon = faEnvelope;
 
   constructor(private store: Store<State>) {
     this.isLoggedIn$ = this.store.pipe(select(selectIsLoggedIn));

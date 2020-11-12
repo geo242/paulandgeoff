@@ -2,16 +2,15 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { MaterialModule } from './material.module';
 import { PodcastModule } from './podcast/podcast.module';
 import { reducers } from './reducers/main';
-import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     AuthenticationModule,
     PodcastModule,
-    FontAwesomeModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
