@@ -10,10 +10,10 @@ import { EpisodeComponent } from './components/episode.component';
 import { PlayerComponent } from './components/player.component';
 import { TopicSuggestionsComponent } from './components/topic-suggestions/topic-suggestions.component';
 import { PodcastComponent } from './containers/podcast.component';
-import { PodcastEffects } from './effects';
-import { podcastReducer } from './reducers';
 import { EpisodesService } from './services/episodes.service';
 import { TopicSuggestionsService } from './services/topic-suggestions.service';
+import { PodcastEffects } from './store/effects';
+import { podcastReducer } from './store/reducer';
 
 @NgModule({
   declarations: [

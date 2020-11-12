@@ -3,9 +3,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { AuthenticationEffects } from './effects';
-import { authenticationReducer } from './reducers';
 import { AuthenticationService } from './services/authentication.service';
+import { AuthenticationEffects } from './store/effects';
+import { authenticationReducer } from './store/reducer';
 
 @NgModule({
   imports: [
