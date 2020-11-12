@@ -4,23 +4,20 @@ import { of } from 'rxjs/internal/observable/of';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { User } from '../../../interfaces/user';
+import { AuthenticationService } from '../services/authentication.service';
 import {
-  AuthenticationActionType, GetSessionFailAction, GetSessionSuccessAction,
+  AuthenticationActionType,
+  GetSessionFailAction,
+  GetSessionSuccessAction,
   GetUserFailAction,
   GetUserSuccessAction,
   LogoutFailAction,
   LogoutSuccessAction
-} from '../actions';
-import { AuthenticationService } from '../services/authentication.service';
+} from './actions';
 
 @Injectable()
 export class AuthenticationEffects {
-  constructor(private actions$: Actions,
-              private auth: AuthenticationService) {
-
-  }
-
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   public login$ = this.actions$.pipe(
     ofType(AuthenticationActionType.LOGIN),
     tap(() => {
@@ -30,7 +27,6 @@ export class AuthenticationEffects {
         window.location.href = 'http://localhost:9000/auth/google';
       }
     }));
-
   @Effect()
   public logout$ = this.actions$.pipe(
     ofType(AuthenticationActionType.LOGOUT),
@@ -41,7 +37,6 @@ export class AuthenticationEffects {
             catchError(() => of(new LogoutFailAction()))
           ))
   );
-
   @Effect()
   public getUser$ = this.actions$.pipe(
     ofType(AuthenticationActionType.GET_USER),
@@ -52,14 +47,18 @@ export class AuthenticationEffects {
             catchError(() => of(new GetUserFailAction()))
           ))
   );
-
   @Effect()
   public getSession$ = this.actions$.pipe(
     ofType(AuthenticationActionType.GET_SESSION),
     switchMap(() => this.auth.getSession()
-      .pipe(
-        map((session: any) => new GetSessionSuccessAction(session)),
-        catchError((error: Error) => of(new GetSessionFailAction(error)))
-      ))
+                        .pipe(
+                          map((session: any) => new GetSessionSuccessAction(session)),
+                          catchError((error: Error) => of(new GetSessionFailAction(error)))
+                        ))
   );
+
+  constructor(private actions$: Actions,
+              private auth: AuthenticationService) {
+
+  }
 }

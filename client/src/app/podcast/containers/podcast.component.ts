@@ -3,8 +3,9 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Episode } from '../../../interfaces/episode';
 import { TopicSuggestion } from '../../../interfaces/topic-suggestion';
-import { selectCurrentUserIsAdmin } from '../../authentication/reducers';
+import { selectCurrentUserIsAdmin } from '../../authentication/store/selectors';
 import { State } from '../../reducers/main';
+import { EpisodeComponent } from '../components/episode.component';
 import {
   AddTopicSuggestionAction,
   GetAction,
@@ -12,15 +13,14 @@ import {
   ShowAllTopicSuggestionsAction,
   TopicVoteAction,
   UpdateShowNotesAction
-} from '../actions';
-import { EpisodeComponent } from '../components/episode.component';
+} from '../store/actions';
 import {
   selectCompleteTopicSuggestions,
   selectEpisodes,
   selectIncompleteTopicSuggestions,
   selectIsTopicSuggestionsBusy,
   selectShowShowAllButton
-} from '../reducers';
+} from '../store/selectors';
 
 @Component({
   selector: 'app-podcast',

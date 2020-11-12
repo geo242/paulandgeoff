@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from '../interfaces/user';
-import { GetSessionAction, GetUserAction, LoginAction, LogoutAction } from './authentication/actions';
-import { selectCurrentUser, selectIsLoggedIn } from './authentication/reducers';
+import { GetSessionAction, GetUserAction, LoginAction, LogoutAction } from './authentication/store/actions';
+import { selectCurrentUser, selectIsLoggedIn } from './authentication/store/selectors';
 import { State } from './reducers/main';
 
 @Component({
