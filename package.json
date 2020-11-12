@@ -9,7 +9,7 @@
     "lint": "jshint ./ --reporter node_modules/jshint-stylish-ex/stylish.js --config .jshintrc",
     "pretest": "npm run lint",
     "test": "mocha --recursive",
-    "build-local": "npm run build --prefix client && node generate-favicons.js"
+    "heroku-postbuild": "npm run heroku-build --prefix client && node generate-favicons.js"
   },
   "dependencies": {
     "async": "^3.2.0",
