@@ -12,7 +12,7 @@
     "heroku-postbuild": "npm run heroku-build --prefix client && node generate-favicons.js"
   },
   "dependencies": {
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "colors": "^1.4.0",
